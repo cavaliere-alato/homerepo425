@@ -1,0 +1,19 @@
+s = [128,64,32,16,8,4,2,1]
+sum = 0
+
+def adc():
+    for i in range(len(s)):
+        global value
+        global sum
+        value = 0
+        value = sum + s[i]
+        signal = bin2dac(value)
+        voltage = value/ levels * maxVoltage
+        time.sleep(0.0007)
+        comporatorValue = GPIO.input(comporator)
+        if comporatorValue == 1:
+            sum+=s[i]
+        if i==7:
+            print("ADC value = {:^3} -> {}, input  voltage = {:.2f}".format(value,signal,voltage))
+            print(i)
+            break
